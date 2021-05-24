@@ -12,10 +12,10 @@ class StartCalculate {
         }
     }
 
-    static String checkExpression(Scanner scanner, String s) {
-        print(s)
+    static String checkExpression(Scanner scanner, String message) {
+        print(message)
         String ex = scanner.nextLine().replaceAll("[\\s]", "")
-        while (!ex.matches("[1234567890+\\-*/)(]*")) {
+        while (!ex.matches("[\\d+\\-*/)(]*")) {
             println("Your expression is not correct. Please enter other value!")
             ex = scanner.nextLine()
         }
