@@ -7,7 +7,7 @@ class ExpressionAtom extends Atom {
    Expression expression
 
     @Override
-    double eval() {
+    BigDecimal eval() {
         expression.eval()
     }
 }

@@ -5,7 +5,7 @@ class Multiplication implements Expression {
     Expression right
 
     @Override
-    double eval() throws Exception {
+    BigDecimal eval() throws Exception {
         return left.eval() * right.eval()
     }
 }

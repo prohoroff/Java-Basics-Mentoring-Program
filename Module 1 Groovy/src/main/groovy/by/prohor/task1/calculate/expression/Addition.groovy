@@ -6,7 +6,7 @@ class Addition implements Expression {
     Expression right
 
     @Override
-    double eval(){
+    BigDecimal eval(){
         left.eval() + right.eval()
     }
 }

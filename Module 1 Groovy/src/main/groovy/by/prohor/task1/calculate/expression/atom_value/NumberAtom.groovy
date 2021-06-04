@@ -7,7 +7,7 @@ class NumberAtom extends Atom{
     def value
 
     @Override
-    double eval(){
+    BigDecimal eval(){
         return value
     }
 }
