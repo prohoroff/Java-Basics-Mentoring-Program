@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd  ../../../target
+java -jar Random-1.0-SNAPSHOT-jar-with-dependencies.jar
