@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta content="text/html" charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>User</title>
+
+    <style>
+        .buttonAdd {
+            color: black;
+            cursor: pointer;
+        }
+
+        .aEdit {
+            color: green;
+            cursor: pointer;
+        }
+
+        .aDelete {
+            color: darkred;
+            cursor: pointer;
+        }
+
+        .aPdf {
+            color: yellowgreen;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<header>
+    <div>
+        <button><a class="buttonAdd" href="/new">Add User</a></button>
+    </div>
+</header>
+
+<section>
+    <div>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="user : ${allUser}">
+                <td th:text="${user.getName()}">Artsiom</td>
+                <td th:text="${user.getEmail()}">art@art.com</td>
+                <td>
+                    <a class="aDelete" th:href="@{/edit/{id}(id=${user.getId})}">Edit</a>
+                    <a class="aDelete" th:href="@{/delete/{id}(id=${user.getId})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<footer>
+    <hr/>
+    <p>&copy;Created by Artsiom Prokharau 2021</p>
+</footer>
+
+</body>
+</html>

@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.String.format;
 
@@ -17,6 +14,7 @@ import static java.lang.String.format;
 
 public class Generate {
     public static void main(String[] args) {
+
         sortedFile(createFile());
     }
 

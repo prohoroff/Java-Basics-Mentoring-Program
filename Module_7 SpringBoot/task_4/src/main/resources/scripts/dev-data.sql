@@ -1,0 +1,2 @@
+INSERT INTO USER (ID, NAME, EMAIL) VALUES (10, 'DEV', 'DEV@email.com');
+
