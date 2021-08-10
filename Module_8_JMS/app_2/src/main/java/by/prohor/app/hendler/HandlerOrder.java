@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HandlerOrder {
 
-    private static final String ORDER_QUEUE = "order.queue";
+    private static final String ORDER_QUEUE = "order.topic";
     private static final String REJECTED_QUEUE = "order.queue.rejected";
     private static final String ACCEPTED_QUEUE = "order.queue.accepted";
 
@@ -23,7 +23,7 @@ public class HandlerOrder {
     @Autowired
     private ServiceOrderSender serviceOrderSender;
 
-    @JmsListener(destination = ORDER_QUEUE)
+    @JmsListener(destination = ORDER_QUEUE, containerFactory = "myFactory")
     public void receive(Order order) {
         System.out.println("Order Received = " + order);
         switch (order.getType()) {

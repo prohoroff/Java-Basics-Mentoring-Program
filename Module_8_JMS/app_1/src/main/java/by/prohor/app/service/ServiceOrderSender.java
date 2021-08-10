@@ -14,7 +14,7 @@ import javax.jms.JMSConsumer;
 @Service
 public class ServiceOrderSender {
 
-    private static final String ORDER_QUEUE = "order.queue";
+    private static final String ORDER_QUEUE = "order.topic";
 
     @Autowired
     private JmsTemplate jmsTemplate;
