@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 import static java.lang.String.format;
@@ -43,7 +44,7 @@ public class Generate {
         File file = new File("resources/random_java.txt");
         Random random = new Random();
         System.out.println("Created file ...");
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()), StandardOpenOption.CREATE_NEW)) {
             for (int i = 0; i < 5000000 ; i++) {
                 writer.write(format("%d%n", random.nextInt(100000)));
             }
