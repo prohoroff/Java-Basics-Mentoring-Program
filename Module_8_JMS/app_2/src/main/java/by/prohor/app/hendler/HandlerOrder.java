@@ -1,7 +1,10 @@
 package by.prohor.app.hendler;
 
 import by.prohor.app.entity.Order;
+import by.prohor.app.entity.Result;
 import by.prohor.app.service.ServiceOrderSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
@@ -13,9 +16,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class HandlerOrder {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HandlerOrder.class);
+
+    private static final String COLOR_CONSOLE = (char) 27 + "[31m";
+
     private static final String ORDER_QUEUE = "order.queue";
-    private static final String REJECTED_QUEUE = "order.queue.rejected";
-    private static final String ACCEPTED_QUEUE = "order.queue.accepted";
+    private static final String SORTED_QUEUE = "order.queue.sorted";
+
 
     private static final int MAX_COUNT = 10;
     private static final int MAX_VOLUME = 1000;
@@ -25,7 +32,6 @@ public class HandlerOrder {
 
     @JmsListener(destination = ORDER_QUEUE)
     public void receive(Order order) {
-        System.out.println("Order Received = " + order);
         switch (order.getType()) {
             case "countable":
                 if (Integer.parseInt(order.getCount()) < MAX_COUNT) {
@@ -47,12 +53,12 @@ public class HandlerOrder {
     }
 
     private void sendOrderAccepted(Order order) {
-        System.out.println("The order accepted");
-        serviceOrderSender.send(ACCEPTED_QUEUE, order);
+        LOGGER.info("{} Order Received ({}) and accepted",COLOR_CONSOLE, order);
+        serviceOrderSender.send(SORTED_QUEUE, order, Result.ACCEPT.getResult());
     }
 
     private void sendOrderRejected(Order order) {
-        System.out.println("The order should be rejected");
-        serviceOrderSender.send(REJECTED_QUEUE, order);
+        LOGGER.info("{} Order Received ({}) and rejected",COLOR_CONSOLE, order);
+        serviceOrderSender.send(SORTED_QUEUE, order, Result.REJECT.getResult());
     }
 }

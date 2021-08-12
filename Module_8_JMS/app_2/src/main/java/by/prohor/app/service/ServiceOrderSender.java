@@ -15,7 +15,11 @@ public class ServiceOrderSender {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    public void send(String rejectedQueue, Order order) {
-        jmsTemplate.convertAndSend(rejectedQueue, order);
+    public void send(String rejectedQueue, Order order, String result) {
+        jmsTemplate.convertAndSend(rejectedQueue, order, messagePostProcessor -> {
+            messagePostProcessor.setStringProperty("result",
+                    result);
+                    return messagePostProcessor;
+        });
     }
 }
