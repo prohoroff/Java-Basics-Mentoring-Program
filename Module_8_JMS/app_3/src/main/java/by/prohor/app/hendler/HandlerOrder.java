@@ -8,7 +8,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import static java.lang.String.format;
 
@@ -34,7 +36,7 @@ public class HandlerOrder {
 
     private void writeOrderToFile(String fileName, Order order) {
         File file = new File("/home/prohor/IdeaProjects/Java Basics Mentoring/Module_8_JMS/app_3/src/main/resources/" + fileName);
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()), StandardOpenOption.WRITE)) {
             writer.write(format("%s%n", order));
         } catch (IOException ex) {
             ex.printStackTrace();
